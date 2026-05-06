@@ -168,6 +168,7 @@ h1, h2, h3, h4, .logo {
     width: auto;
     object-fit: contain;
     filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.1));
+    mix-blend-mode: screen; /* Makes the black background completely transparent! */
 }
 
 .nav-links {
