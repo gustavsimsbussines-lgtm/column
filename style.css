@@ -573,6 +573,7 @@ h1, h2, h3, h4, .logo {
 }
 
 .pricing-card {
+    position: relative;
     padding: 2rem 2rem;
     display: flex;
     flex-direction: column;
@@ -586,6 +587,7 @@ h1, h2, h3, h4, .logo {
 }
 
 .popular {
+    padding-top: 3.5rem;
     background: rgba(20, 20, 30, 0.7);
     border-color: rgba(79, 70, 229, 0.25);
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(79, 70, 229, 0.1);
