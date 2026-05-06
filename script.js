@@ -229,5 +229,56 @@ document.addEventListener('DOMContentLoaded', () => {
             toast.classList.remove('show');
             setTimeout(() => toast.remove(), 300); // Wait for exit animation
         }, 3000);
+    // --- Matrix Rain Effect ---
+    const canvas = document.getElementById('rain-canvas');
+    if (canvas) {
+        const ctx = canvas.getContext('2d');
+        
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+        
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+
+        // Hacking / Tech characters
+        const characters = '01ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*'.split('');
+        const fontSize = 16;
+        let columns = width / fontSize;
+        let drops = [];
+        for (let x = 0; x < columns; x++) {
+            drops[x] = 1;
+        }
+
+        function drawRain() {
+            // Semi-transparent black to create trailing effect
+            ctx.fillStyle = 'rgba(5, 5, 8, 0.1)';
+            ctx.fillRect(0, 0, width, height);
+
+            ctx.fillStyle = '#4f46e5'; // Primary accent color (purple-blue)
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = characters[Math.floor(Math.random() * characters.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                if (drops[i] * fontSize > height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+
+        // Handle resize properly
+        window.addEventListener('resize', () => {
+            columns = width / fontSize;
+            drops = [];
+            for (let x = 0; x < columns; x++) {
+                drops[x] = 1;
+            }
+        });
+
+        setInterval(drawRain, 35);
     }
 });
