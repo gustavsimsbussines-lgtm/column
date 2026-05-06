@@ -146,10 +146,10 @@ h1, h2, h3, h4, .logo {
     align-items: center;
     width: 100%;
     max-width: 1100px;
-    background: rgba(10, 10, 15, 0.7);
+    background: rgba(10, 10, 15, 0.15);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 12px;
     padding: 0.7rem 1.6rem;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
