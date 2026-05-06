@@ -229,6 +229,8 @@ document.addEventListener('DOMContentLoaded', () => {
             toast.classList.remove('show');
             setTimeout(() => toast.remove(), 300); // Wait for exit animation
         }, 3000);
+    }
+
     // --- Matrix Rain Effect ---
     const canvas = document.getElementById('rain-canvas');
     if (canvas) {
