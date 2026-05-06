@@ -283,4 +283,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
         setInterval(drawRain, 35);
     }
+    // --- Hacker Text Effect ---
+    const hackText = document.getElementById('hack-text');
+    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*";
+    let hackInterval = null;
+
+    if (hackText) {
+        const startHacking = (target) => {
+            let iteration = 0;
+            clearInterval(hackInterval);
+            
+            hackInterval = setInterval(() => {
+                target.innerText = target.dataset.value
+                    .split("")
+                    .map((letter, index) => {
+                        if(index < iteration || letter === " ") {
+                            return target.dataset.value[index];
+                        }
+                        return letters[Math.floor(Math.random() * letters.length)];
+                    })
+                    .join("");
+                
+                if(iteration >= target.dataset.value.length){ 
+                    clearInterval(hackInterval);
+                }
+                
+                iteration += 1 / 3;
+            }, 30);
+        };
+        
+        setTimeout(() => startHacking(hackText), 500);
+
+        const pillBadge = document.querySelector('.pill-badge');
+        if (pillBadge) {
+            pillBadge.addEventListener('mouseenter', () => startHacking(hackText));
+        }
+    }
 });
