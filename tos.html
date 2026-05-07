@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Column - Terms of Service</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="security.js"></script>
+    <style>
+        .legal-container {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 8rem 2rem 4rem;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .legal-card {
+            width: 100%;
+            max-width: 900px;
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            background: rgba(15, 15, 22, 0.7);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            backdrop-filter: blur(12px);
+        }
+        
+        .legal-header {
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .legal-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .legal-header p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        .legal-content h2 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            color: white;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .legal-content h2::before {
+            content: '';
+            display: block;
+            width: 8px;
+            height: 8px;
+            background: var(--accent-primary);
+            border-radius: 50%;
+        }
+
+        .legal-content p {
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .legal-content ul {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .legal-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .highlight-box {
+            background: rgba(236, 72, 153, 0.05);
+            border-left: 4px solid var(--accent-secondary);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .highlight-box p {
+            margin-bottom: 0;
+            color: #fce7f3;
+        }
+    </style>
+</head>
+<body>
+    <div class="ambient-background">
+        <canvas id="rain-canvas"></canvas>
+    </div>
+    
+    <!-- Navbar -->
+    <header class="navbar" data-aos="fade-down" data-aos-duration="800">
+        <div class="nav-container">
+            <div class="logo-wrapper" style="display: flex; align-items: center; gap: 0.8rem;">
+                <img src="logo.png" alt="Column Logo" class="logo-img" style="height: 40px; width: auto; object-fit: contain; mix-blend-mode: screen;">
+                <span class="logo">COLUMN</span>
+            </div>
+            <nav class="nav-links">
+                <a href="index.html#home">Home</a>
+                <a href="index.html#features">Features</a>
+                <a href="index.html#pricing">Pricing</a>
+                <a href="index.html#faq">FAQ</a>
+                <a href="status.html">Status</a>
+            </nav>
+            <div class="nav-actions">
+                <a href="login.html" class="btn-secondary desktop-only">Portal</a>
+                <a href="index.html#pricing" class="btn-primary desktop-only">Purchase</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="legal-container">
+        <div class="legal-card" data-aos="fade-up" data-aos-duration="1000">
+            <div class="legal-header">
+                <h1>Terms of <span class="text-gradient">Service</span></h1>
+                <p>Last updated: May 7, 2026</p>
+            </div>
+            
+            <div class="legal-content">
+                <p>Welcome to Column. By purchasing, downloading, or using our software, you automatically agree to be bound by the following Terms of Service. Please read them carefully.</p>
+
+                <h2>1. General Usage & License</h2>
+                <p>Upon purchase, you are granted a limited, non-transferable, and non-exclusive license to use the software for the duration of your purchased subscription. You may not share, resell, or distribute your license key or the software files. Account sharing will result in an immediate and permanent ban without refund.</p>
+
+                <h2>2. Refund & Dispute Policy</h2>
+                <div class="highlight-box">
+                    <p><strong>ALL SALES ARE FINAL.</strong> Because we deliver digital, intangible goods instantly upon purchase, we do not offer refunds, exchanges, or returns under any circumstances.</p>
+                </div>
+                <ul>
+                    <li>If you experience technical issues, you must contact our support team in Discord. A technical issue does not entitle you to a refund.</li>
+                    <li>Opening a dispute or chargeback via PayPal, Stripe, or your credit card provider will result in the immediate termination of your license, a hardware ban from our services, and your information may be reported to anti-fraud networks.</li>
+                </ul>
+
+                <h2>3. Game Bans & Risk</h2>
+                <p>While we take extreme measures to ensure our software remains undetected (including kernel drivers and frequent offset updates), you acknowledge that modifying game memory inherently carries risk. <strong>We are not responsible for any actions taken against your game accounts, including suspensions or permanent bans.</strong> You use this software entirely at your own risk.</p>
+
+                <h2>4. Hardware ID (HWID) Resets</h2>
+                <p>Your license key is locked to your computer's hardware. You are allowed to reset your HWID through the Portal if you upgrade your PC. However, frequent or abusive HWID resets will be flagged by our system and may result in your key being revoked to prevent account sharing.</p>
+
+                <h2>5. Software Updates & Downtime</h2>
+                <p>If the target game receives an update, our software will be temporarily disabled while we update the security offsets. Your subscription time is <strong>not</strong> paused during routine updates. We guarantee a 95% uptime, but we reserve the right to temporarily disable the service for critical security maintenance without compensation.</p>
+
+                <h2>6. Code of Conduct</h2>
+                <p>We reserve the right to terminate your license and ban you from our community if you engage in toxic behavior, threaten staff members, attempt to crack/reverse engineer our software, or intentionally spread false information about our undetected status.</p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Simple matrix rain just for atmosphere
+        const canvas = document.getElementById('rain-canvas');
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+            let width = canvas.width = window.innerWidth;
+            let height = canvas.height = window.innerHeight;
+            
+            window.addEventListener('resize', () => {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+            });
+
+            const characters = '01ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*'.split('');
+            const fontSize = 16;
+            let columns = width / fontSize;
+            let drops = [];
+            for (let x = 0; x < columns; x++) { drops[x] = 1; }
+
+            function drawRain() {
+                ctx.fillStyle = 'rgba(5, 5, 8, 0.1)';
+                ctx.fillRect(0, 0, width, height);
+                ctx.fillStyle = '#4f46e5';
+                ctx.font = fontSize + 'px monospace';
+
+                for (let i = 0; i < drops.length; i++) {
+                    const text = characters[Math.floor(Math.random() * characters.length)];
+                    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                    if (drops[i] * fontSize > height && Math.random() > 0.975) drops[i] = 0;
+                    drops[i]++;
+                }
+            }
+            setInterval(drawRain, 35);
+        }
+    </script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            once: true,
+            duration: 800
+        });
+    </script>
+</body>
+</html>
