@@ -19,6 +19,13 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="security.js"></script>
+    <script>
+        // Restrict chat access to logged-in users
+        if (!localStorage.getItem('saved_license')) {
+            alert("You must be logged into the Portal to access the Global Chat.");
+            window.location.href = "login.html";
+        }
+    </script>
     <style>
         .chat-container {
             min-height: 100vh;
