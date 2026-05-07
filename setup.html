@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Column - Setup Guide</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="security.js"></script>
+    <style>
+        .setup-container {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 8rem 2rem 4rem;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .setup-card {
+            width: 100%;
+            max-width: 900px;
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            background: rgba(15, 15, 22, 0.7);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            backdrop-filter: blur(12px);
+        }
+        
+        .setup-header {
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .setup-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .setup-header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .step-container {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+
+        .step-item {
+            display: flex;
+            gap: 1.5rem;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .step-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--accent-primary);
+        }
+
+        .step-number {
+            flex-shrink: 0;
+            width: 50px;
+            height: 50px;
+            background: rgba(79, 70, 229, 0.15);
+            border: 1px solid rgba(79, 70, 229, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+        }
+
+        .step-content h3 {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            color: white;
+            margin-bottom: 0.8rem;
+            margin-top: 0.2rem;
+        }
+
+        .step-content p {
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .step-content img {
+            max-width: 100%;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 1rem;
+            display: none; /* Can be enabled if you add images later */
+        }
+        
+        .warning-box {
+            background: rgba(245, 158, 11, 0.1);
+            border-left: 4px solid #f59e0b;
+            padding: 1rem 1.5rem;
+            margin-top: 1rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .warning-box p {
+            margin-bottom: 0;
+            color: #fde68a;
+            font-size: 0.95rem;
+        }
+
+        .portal-btn {
+            margin-top: 2rem;
+            align-self: center;
+            padding: 1rem 3rem;
+        }
+        
+        @media (max-width: 768px) {
+            .step-item {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="ambient-background">
+        <canvas id="rain-canvas"></canvas>
+    </div>
+    
+    <!-- Navbar -->
+    <header class="navbar" data-aos="fade-down" data-aos-duration="800">
+        <div class="nav-container">
+            <div class="logo-wrapper" style="display: flex; align-items: center; gap: 0.8rem;">
+                <img src="logo.png" alt="Column Logo" class="logo-img" style="height: 40px; width: auto; object-fit: contain; mix-blend-mode: screen;">
+                <span class="logo">COLUMN</span>
+            </div>
+            <nav class="nav-links">
+                <a href="index.html#home">Home</a>
+                <a href="index.html#features">Features</a>
+                <a href="index.html#pricing">Pricing</a>
+                <a href="index.html#faq">FAQ</a>
+                <a href="status.html">Status</a>
+            </nav>
+            <div class="nav-actions">
+                <a href="login.html" class="btn-secondary desktop-only">Portal</a>
+                <a href="index.html#pricing" class="btn-primary desktop-only">Purchase</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="setup-container">
+        <div class="setup-card" data-aos="fade-up" data-aos-duration="1000">
+            <div class="setup-header">
+                <h1>Installation <span class="text-gradient">Guide</span></h1>
+                <p>Follow these exact steps to ensure a safe and successful injection.</p>
+            </div>
+            
+            <div class="step-container">
+                
+                <!-- Step 1 -->
+                <div class="step-item" data-aos="fade-up" data-aos-delay="100">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Disable Antivirus & Windows Defender</h3>
+                        <p>Because our software interacts directly with game memory and uses a custom kernel driver to stay undetected, Windows will falsely flag it as a virus. You must completely disable Windows Defender Real-Time Protection and any third-party antivirus (like McAfee or Norton) before downloading.</p>
+                        <div class="warning-box">
+                            <p><strong>Important:</strong> If you skip this step, Windows will automatically delete the loader file the second you try to open it.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="step-item" data-aos="fade-up" data-aos-delay="200">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Disable Secure Boot (BIOS)</h3>
+                        <p>Our kernel driver requires Secure Boot to be disabled in order to load into memory properly. Restart your PC, repeatedly press F2 or DEL to enter your BIOS settings, find the "Secure Boot" option, and set it to <strong>Disabled</strong>. Save and exit.</p>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="step-item" data-aos="fade-up" data-aos-delay="300">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Enable Discord Overlay</h3>
+                        <p>Because our software is a fully <strong>External</strong> cheat, it uses Discord's Game Overlay to draw the ESP visuals safely over your game without injecting into the game's memory. You must open Discord, go to User Settings > Game Overlay, and ensure <strong>"Enable in-game overlay"</strong> is toggled <strong>ON</strong>.</p>
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="step-item" data-aos="fade-up" data-aos-delay="400">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Download & Extract Loader</h3>
+                        <p>Login to the Client Portal using your License Key. Click the "Download Loader" button. Once downloaded, extract the ZIP file to your Desktop or a dedicated folder. Do not run the loader directly from inside the ZIP archive.</p>
+                    </div>
+                </div>
+
+                <!-- Step 5 -->
+                <div class="step-item" data-aos="fade-up" data-aos-delay="500">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h3>Run Loader & Play</h3>
+                        <p>Right-click the extracted Loader executable and select <strong>"Run as Administrator"</strong>. Enter your License Key when prompted. Wait for the loader to say "Waiting for Game...", and then launch Overwatch 2. The Discord Overlay will hook the game, and the menu will automatically appear once you are in the main menu (Press INSERT to toggle).</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <a href="login.html" class="btn-primary btn-large btn-glow portal-btn" data-aos="fade-up" data-aos-delay="500">Go to Portal</a>
+        </div>
+    </main>
+
+    <script>
+        // Matrix Rain
+        const canvas = document.getElementById('rain-canvas');
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+            let width = canvas.width = window.innerWidth;
+            let height = canvas.height = window.innerHeight;
+            
+            window.addEventListener('resize', () => {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+            });
+
+            const characters = '01ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*'.split('');
+            const fontSize = 16;
+            let columns = width / fontSize;
+            let drops = [];
+            for (let x = 0; x < columns; x++) { drops[x] = 1; }
+
+            function drawRain() {
+                ctx.fillStyle = 'rgba(5, 5, 8, 0.1)';
+                ctx.fillRect(0, 0, width, height);
+                ctx.fillStyle = '#4f46e5';
+                ctx.font = fontSize + 'px monospace';
+
+                for (let i = 0; i < drops.length; i++) {
+                    const text = characters[Math.floor(Math.random() * characters.length)];
+                    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                    if (drops[i] * fontSize > height && Math.random() > 0.975) drops[i] = 0;
+                    drops[i]++;
+                }
+            }
+            setInterval(drawRain, 35);
+        }
+    </script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            once: true,
+            offset: 50,
+            duration: 800,
+            easing: 'ease-out-cubic',
+        });
+    </script>
+</body>
+</html>
