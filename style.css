@@ -128,10 +128,41 @@ h1, h2, h3, h4, .logo {
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
 }
 
+/* Announcement Bar */
+.announcement-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(90deg, rgba(79, 70, 229, 0.8), rgba(236, 72, 153, 0.8));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: white;
+    text-align: center;
+    padding: 8px 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.pulse-dot-small {
+    width: 6px;
+    height: 6px;
+    background: #10b981;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #10b981;
+    animation: pulse-dot 2s infinite;
+}
+
 /* Navbar */
 .navbar {
     position: fixed;
-    top: 20px;
+    top: 50px;
     left: 0;
     width: 100%;
     z-index: 100;
