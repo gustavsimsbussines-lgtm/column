@@ -236,25 +236,9 @@
 
         // Simulate fetching live stats
         document.addEventListener('DOMContentLoaded', () => {
-            // Generates a random online user count between 120 and 180 to look realistic
-            const baseUsers = 135;
-            const fluctuation = Math.floor(Math.random() * 30) - 15;
-            
             setTimeout(() => {
                 const el = document.getElementById('users-online');
-                let start = 0;
-                const end = baseUsers + fluctuation;
-                const duration = 1500;
-                const increment = end / (duration / 30);
-                
-                const timer = setInterval(() => {
-                    start += increment;
-                    el.textContent = Math.floor(start);
-                    if (start >= end) {
-                        el.textContent = end;
-                        clearInterval(timer);
-                    }
-                }, 30);
+                el.textContent = "0";
                 
                 // Set current time
                 const now = new Date();
