@@ -512,6 +512,15 @@
             const masked = key.substring(0, 4) + "-XXXX-XXXX-" + key.substring(key.length - 4);
             displayKey.textContent = masked;
             displayExpiry.textContent = expiry;
+            
+            // Initialize Chat Box
+            if (!document.getElementById('tlkio-script')) {
+                const script = document.createElement('script');
+                script.id = 'tlkio-script';
+                script.src = "https://tlk.io/wrapper.js";
+                script.async = true;
+                document.body.appendChild(script);
+            }
 
             // Check HWID cooldown
             const varData = await keyAuthGetVar(currentSessionId, "last_hwid_reset");
@@ -638,6 +647,5 @@
             }
         });
     </script>
-    <script async src="https://tlk.io/wrapper.js"></script>
 </body>
 </html>
