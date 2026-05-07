@@ -201,6 +201,26 @@
             </button>
         </div>
 
+        <!-- Set Username View -->
+        <div id="set-username-view" class="login-card glass-panel" style="display: none;">
+            <div class="login-header">
+                <h2>Welcome to Column</h2>
+                <p>Since it's your first time logging in, please choose a username.</p>
+            </div>
+            
+            <div class="error-message" id="username-error-msg"></div>
+            
+            <div class="input-group">
+                <label for="choose-username">Username</label>
+                <input type="text" id="choose-username" class="input-control" placeholder="Enter your username" autocomplete="off" spellcheck="false">
+            </div>
+            
+            <button id="save-username-btn" class="btn-primary btn-block btn-large">
+                <span id="save-username-text">Save Username</span>
+                <svg class="loader-icon" id="save-username-loader" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><circle cx="12" cy="12" r="10" stroke-dasharray="31.4 31.4" stroke-dashoffset="0"></circle></svg>
+            </button>
+        </div>
+
         <!-- Dashboard View -->
         <div id="dashboard-view" class="login-card glass-panel">
             <div class="login-header">
@@ -286,6 +306,17 @@
         const downloadBtn = document.getElementById('download-btn');
         const logoutBtn = document.getElementById('logout-btn');
 
+        const setUsernameView = document.getElementById('set-username-view');
+        const chooseUsernameInput = document.getElementById('choose-username');
+        const saveUsernameBtn = document.getElementById('save-username-btn');
+        const usernameErrorMsg = document.getElementById('username-error-msg');
+        const saveUsernameText = document.getElementById('save-username-text');
+        const saveUsernameLoader = document.getElementById('save-username-loader');
+
+        let currentSessionId = null;
+        let currentKey = null;
+        let currentExpiry = null;
+
         // A simple HWID generation for browser (usually localstorage based)
         let hwid = localStorage.getItem('hwid');
         if (!hwid) {
@@ -321,6 +352,26 @@
             }
         }
 
+        async function keyAuthGetVar(sessionId, varName) {
+            try {
+                const url = `${API_URL}?type=getvar&var=${encodeURIComponent(varName)}&sessionid=${sessionId}&name=${encodeURIComponent(APP_NAME)}&ownerid=${OWNER_ID}`;
+                const res = await fetch(url);
+                return await res.json();
+            } catch (err) {
+                return { success: false };
+            }
+        }
+
+        async function keyAuthSetVar(sessionId, varName, data) {
+            try {
+                const url = `${API_URL}?type=setvar&var=${encodeURIComponent(varName)}&data=${encodeURIComponent(data)}&sessionid=${sessionId}&name=${encodeURIComponent(APP_NAME)}&ownerid=${OWNER_ID}`;
+                const res = await fetch(url);
+                return await res.json();
+            } catch (err) {
+                return { success: false, message: "Network error" };
+            }
+        }
+
         function formatExpiry(unixTimestamp) {
             if (!unixTimestamp) return "Lifetime / Unknown";
             const date = new Date(unixTimestamp * 1000);
@@ -347,8 +398,20 @@
                     if (result.info && result.info.subscriptions && result.info.subscriptions.length > 0) {
                         expiryTimestamp = result.info.subscriptions[0].expiry;
                     }
+                    
+                    currentSessionId = sessionId;
+                    currentKey = key;
+                    currentExpiry = formatExpiry(expiryTimestamp);
 
-                    showDashboard(key, formatExpiry(expiryTimestamp));
+                    // Check if username is set
+                    const usernameVar = await keyAuthGetVar(sessionId, "username");
+                    if (usernameVar.success && usernameVar.response) {
+                        showDashboard(currentKey, currentExpiry, usernameVar.response);
+                    } else {
+                        // First time, no username found
+                        loginView.style.display = 'none';
+                        setUsernameView.style.display = 'flex';
+                    }
                 } else {
                     showError(result.message || "Invalid license key.");
                 }
@@ -383,9 +446,14 @@
             }
         }
 
-        function showDashboard(key, expiry) {
+        function showDashboard(key, expiry, username = "User") {
             loginView.style.display = 'none';
+            setUsernameView.style.display = 'none';
             dashboardView.style.display = 'flex';
+            
+            // update welcome message
+            const dashboardHeader = dashboardView.querySelector('h2');
+            dashboardHeader.textContent = `Welcome Back, ${username}`;
             
             // Mask the key
             const masked = key.substring(0, 4) + "-XXXX-XXXX-" + key.substring(key.length - 4);
@@ -393,10 +461,43 @@
             displayExpiry.textContent = expiry;
         }
 
+        saveUsernameBtn.addEventListener('click', async () => {
+            const username = chooseUsernameInput.value.trim();
+            if (!username) {
+                usernameErrorMsg.textContent = "Please enter a username.";
+                usernameErrorMsg.style.display = 'block';
+                return;
+            }
+
+            saveUsernameText.textContent = "Saving...";
+            saveUsernameLoader.style.display = 'block';
+            saveUsernameBtn.disabled = true;
+            usernameErrorMsg.style.display = 'none';
+
+            try {
+                const res = await keyAuthSetVar(currentSessionId, "username", username);
+                if (res.success) {
+                    setUsernameView.style.display = 'none';
+                    showDashboard(currentKey, currentExpiry, username);
+                } else {
+                    usernameErrorMsg.textContent = res.message || "Failed to set username.";
+                    usernameErrorMsg.style.display = 'block';
+                }
+            } catch (err) {
+                usernameErrorMsg.textContent = "Network error occurred.";
+                usernameErrorMsg.style.display = 'block';
+            } finally {
+                saveUsernameText.textContent = "Save Username";
+                saveUsernameLoader.style.display = 'none';
+                saveUsernameBtn.disabled = false;
+            }
+        });
+
         logoutBtn.addEventListener('click', () => {
             localStorage.removeItem('saved_license');
             licenseKeyInput.value = '';
             dashboardView.style.display = 'none';
+            setUsernameView.style.display = 'none';
             loginView.style.display = 'flex';
         });
 
