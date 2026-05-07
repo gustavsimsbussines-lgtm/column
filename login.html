@@ -231,7 +231,7 @@
             <div class="dashboard-info">
                 <div class="info-row">
                     <span class="info-label">Status</span>
-                    <span class="success-badge">Valid</span>
+                    <span class="success-badge" style="background: rgba(139, 92, 246, 0.1); color: #a78bfa; border-color: rgba(139, 92, 246, 0.2);">Undetected</span>
                 </div>
                 <div class="info-row">
                     <span class="info-label">Key</span>
@@ -243,11 +243,17 @@
                 </div>
             </div>
             
-            <button id="download-btn" class="btn-primary btn-block btn-large btn-glow" style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+            <button id="download-btn" class="btn-primary btn-block btn-large btn-glow" style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 0.5rem;">
                 <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
                 Download Loader
             </button>
-            <button id="logout-btn" class="btn-secondary btn-block">Logout</button>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                <button id="reset-hwid-btn" class="btn-secondary btn-block" style="display: flex; align-items: center; justify-content: center;">
+                    <span id="reset-hwid-text">Reset HWID</span>
+                    <svg class="loader-icon" id="reset-hwid-loader" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" style="display: none;"><circle cx="12" cy="12" r="10" stroke-dasharray="31.4 31.4" stroke-dashoffset="0"></circle></svg>
+                </button>
+                <button id="logout-btn" class="btn-secondary btn-block">Logout</button>
+            </div>
         </div>
     </main>
 
@@ -305,6 +311,7 @@
         const displayExpiry = document.getElementById('display-expiry');
         const downloadBtn = document.getElementById('download-btn');
         const logoutBtn = document.getElementById('logout-btn');
+        const resetHwidBtn = document.getElementById('reset-hwid-btn');
 
         const setUsernameView = document.getElementById('set-username-view');
         const chooseUsernameInput = document.getElementById('choose-username');
@@ -490,6 +497,49 @@
                 saveUsernameText.textContent = "Save Username";
                 saveUsernameLoader.style.display = 'none';
                 saveUsernameBtn.disabled = false;
+            }
+        });
+
+        resetHwidBtn.addEventListener('click', async () => {
+            const btnText = document.getElementById('reset-hwid-text');
+            const loader = document.getElementById('reset-hwid-loader');
+            
+            btnText.style.display = 'none';
+            loader.style.display = 'block';
+            resetHwidBtn.disabled = true;
+
+            try {
+                // Check last reset
+                const varData = await keyAuthGetVar(currentSessionId, "last_hwid_reset");
+                const now = Date.now();
+                
+                if (varData.success && varData.response) {
+                    const lastReset = parseInt(varData.response);
+                    const twoDaysMs = 2 * 24 * 60 * 60 * 1000;
+                    
+                    if (now - lastReset < twoDaysMs) {
+                        const timeLeft = twoDaysMs - (now - lastReset);
+                        const hoursLeft = Math.ceil(timeLeft / (1000 * 60 * 60));
+                        alert(`You can only reset your HWID every 2 days. Please wait ${hoursLeft} more hours.`);
+                        return;
+                    }
+                }
+                
+                // Set new reset time
+                const res = await keyAuthSetVar(currentSessionId, "last_hwid_reset", now.toString());
+                if (res.success) {
+                    // For browser demo, we reset the local HWID to force new one next time
+                    localStorage.removeItem('hwid');
+                    alert("HWID Reset Successful! You can now login from your new hardware.");
+                } else {
+                    alert("Failed to reset HWID: " + (res.message || "Unknown error"));
+                }
+            } catch (err) {
+                alert("Network error occurred while resetting HWID.");
+            } finally {
+                btnText.style.display = 'block';
+                loader.style.display = 'none';
+                resetHwidBtn.disabled = false;
             }
         });
 
