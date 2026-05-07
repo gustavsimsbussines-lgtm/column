@@ -159,6 +159,30 @@
     </style>
 </head>
 <body>
+    <!-- Secure Pre-loader -->
+    <div id="secure-preloader" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #050508; z-index: 999999; display: flex; flex-direction: column; justify-content: center; align-items: center; font-family: 'Inter', sans-serif; color: white; transition: opacity 0.5s ease;">
+        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#4f46e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="animation: pulse 1.5s infinite;">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+        </svg>
+        <h2 style="margin-top: 1.5rem; font-size: 1.5rem; font-weight: 600;">Column Security</h2>
+        <p style="color: #8892b0; margin-top: 0.5rem; font-size: 0.9rem;">Verifying secure connection to host...</p>
+        <div style="margin-top: 2rem; width: 200px; height: 4px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden;">
+            <div id="preloader-bar" style="width: 0%; height: 100%; background: #4f46e5; transition: width 2.5s cubic-bezier(0.4, 0, 0.2, 1);"></div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => { document.getElementById('preloader-bar').style.width = '100%'; }, 100);
+            setTimeout(() => {
+                const preloader = document.getElementById('secure-preloader');
+                preloader.style.opacity = '0';
+                setTimeout(() => { preloader.style.display = 'none'; }, 500);
+            }, 2600);
+        });
+    </script>
+    <style>@keyframes pulse { 0% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.1); opacity: 0.7; } 100% { transform: scale(1); opacity: 1; } }</style>
+
     <div class="ambient-background">
         <canvas id="rain-canvas"></canvas>
         <div class="glow-orb orb-1"></div>
