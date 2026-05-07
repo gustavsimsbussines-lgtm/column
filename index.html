@@ -89,7 +89,25 @@
             <div class="hero-content">
                 <div class="pill-badge" style="padding: 0.6rem 1.4rem; font-size: 0.9rem; margin-bottom: 2rem;">
                     <span class="pulse-dot"></span>
-                    <span>🎉</span> <span class="hack-text" data-value="LAUNCHING IN">LAUNCHING IN</span> <span id="countdown" style="font-variant-numeric: tabular-nums; font-weight: 700; color: var(--accent-secondary); margin: 0 4px;">14d 00h 00m 00s</span> <span class="hack-text" data-value="! 20% DISCOUNT">! 20% DISCOUNT</span> <span>🚀</span>
+                    <span>🎉</span> <span class="hack-text" data-value="LAUNCHING IN">LAUNCHING IN</span> <span id="countdown" style="font-variant-numeric: tabular-nums; font-weight: 700; color: var(--accent-secondary); margin: 0 4px; min-width: 120px; display: inline-block;">14d 00h 00m 00s</span> <span class="hack-text" data-value="! 20% DISCOUNT">! 20% DISCOUNT</span> <span>🚀</span>
+                    <script>
+                        (function() {
+                            const el = document.getElementById('countdown');
+                            const target = new Date("2026-05-21T14:20:00+02:00").getTime();
+                            function update() {
+                                const now = new Date().getTime();
+                                const d = target - now;
+                                if (d < 0) { el.textContent = "00d 00h 00m 00s"; return; }
+                                const days = Math.floor(d / (1000 * 60 * 60 * 24));
+                                const hours = Math.floor((d % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                                const mins = Math.floor((d % (1000 * 60 * 60)) / (1000 * 60));
+                                const secs = Math.floor((d % (1000 * 60)) / 1000);
+                                el.textContent = `${days}d ${hours.toString().padStart(2, '0')}h ${mins.toString().padStart(2, '0')}m ${secs.toString().padStart(2, '0')}s`;
+                            }
+                            update();
+                            setInterval(update, 1000);
+                        })();
+                    </script>
                 </div>
                 <h1 class="hero-title">Experience <span class="text-gradient">Absolute Dominance</span></h1>
                 <p class="hero-subtitle">The most advanced, undetected, and feature-rich utility for Overwatch. Dominate the ladder with flawless predictive aiming and unbeatable security.</p>

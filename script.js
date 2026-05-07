@@ -324,27 +324,5 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- Countdown Logic ---
-    const countdownEl = document.getElementById('countdown');
-    if (countdownEl) {
-        // Target date: 2 weeks from May 7th 2026
-        const targetDate = new Date("2026-05-21T14:20:00+02:00").getTime();
-        
-        setInterval(() => {
-            const now = new Date().getTime();
-            const distance = targetDate - now;
-            
-            if (distance < 0) {
-                countdownEl.textContent = "00d 00h 00m 00s";
-                return;
-            }
-            
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            
-            countdownEl.textContent = `${days}d ${hours.toString().padStart(2, '0')}h ${minutes.toString().padStart(2, '0')}m ${seconds.toString().padStart(2, '0')}s`;
-        }, 1000);
-    }
+
 });
