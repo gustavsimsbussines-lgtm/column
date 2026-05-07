@@ -20,6 +20,24 @@
 
 html {
     scroll-behavior: smooth;
+    scrollbar-color: var(--accent-primary) var(--bg-color);
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-color);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(79, 70, 229, 0.5);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(79, 70, 229, 0.9);
 }
 
 body {
@@ -31,6 +49,11 @@ body {
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    cursor: crosshair;
+}
+
+a, button, .btn-primary, .btn-secondary, .pricing-card, .faq-item {
+    cursor: pointer;
 }
 
 /* Typography */

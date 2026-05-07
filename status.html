@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Column - Live Status</title>
+    
+    <!-- Premium Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .status-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8rem 2rem 4rem;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .status-card {
+            width: 100%;
+            max-width: 600px;
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        
+        .status-header {
+            text-align: center;
+        }
+        
+        .status-header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .status-header p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        .status-box {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .pulse-indicator {
+            width: 16px;
+            height: 16px;
+            background: #10b981;
+            border-radius: 50%;
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.6);
+            animation: pulse-green 2s infinite;
+        }
+
+        @keyframes pulse-green {
+            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+
+        .status-title {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .status-badge {
+            background: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .stat-item:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+            font-family: var(--font-display);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 500;
+        }
+        
+        .last-updated {
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="ambient-background">
+        <canvas id="rain-canvas"></canvas>
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+        <div class="glow-orb orb-3"></div>
+    </div>
+    
+    <!-- Navbar -->
+    <header class="navbar" data-aos="fade-down" data-aos-duration="800">
+        <div class="nav-container">
+            <div class="logo-wrapper" style="display: flex; align-items: center; gap: 0.8rem;">
+                <img src="logo.png" alt="Column Logo" class="logo-img" style="height: 40px; width: auto; object-fit: contain; mix-blend-mode: screen;">
+                <span class="logo">COLUMN</span>
+            </div>
+            <nav class="nav-links">
+                <a href="index.html#home">Home</a>
+                <a href="index.html#features">Features</a>
+                <a href="index.html#pricing">Pricing</a>
+                <a href="index.html#faq">FAQ</a>
+                <a href="status.html" style="color: white;">Status</a>
+            </nav>
+            <div class="nav-actions">
+                <a href="login.html" class="btn-secondary desktop-only">Portal</a>
+                <a href="index.html#pricing" class="btn-primary desktop-only">Purchase</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="status-container">
+        <div class="status-card glass-panel" data-aos="fade-up" data-aos-duration="1000">
+            <div class="status-header">
+                <h1>Live <span class="text-gradient">Status</span></h1>
+                <p>Real-time network and security monitoring.</p>
+            </div>
+            
+            <div class="status-box">
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 0.5rem;">
+                    <div class="pulse-indicator"></div>
+                    <span class="status-title">Overwatch 2</span>
+                </div>
+                <div class="status-badge">UNDETECTED</div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
+                    <div class="stat-value" id="users-online">--</div>
+                    <div class="stat-label">Users Online</div>
+                </div>
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="300">
+                    <div class="stat-value" id="uptime">100%</div>
+                    <div class="stat-label">Uptime</div>
+                </div>
+            </div>
+            
+            <div class="last-updated">
+                Last checked: <span id="time-checked" style="color: white; font-weight: 500;">Just now</span>
+            </div>
+        </div>
+    </main>
+
+    <!-- Matrix Rain Canvas Script -->
+    <script>
+        // Matrix Rain
+        const canvas = document.getElementById('rain-canvas');
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+            let width = canvas.width = window.innerWidth;
+            let height = canvas.height = window.innerHeight;
+            
+            window.addEventListener('resize', () => {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+            });
+
+            const characters = '01ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*'.split('');
+            const fontSize = 16;
+            let columns = width / fontSize;
+            let drops = [];
+            for (let x = 0; x < columns; x++) { drops[x] = 1; }
+
+            function drawRain() {
+                ctx.fillStyle = 'rgba(5, 5, 8, 0.1)';
+                ctx.fillRect(0, 0, width, height);
+                ctx.fillStyle = '#4f46e5';
+                ctx.font = fontSize + 'px monospace';
+
+                for (let i = 0; i < drops.length; i++) {
+                    const text = characters[Math.floor(Math.random() * characters.length)];
+                    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                    if (drops[i] * fontSize > height && Math.random() > 0.975) drops[i] = 0;
+                    drops[i]++;
+                }
+            }
+            setInterval(drawRain, 35);
+        }
+
+        // Simulate fetching live stats
+        document.addEventListener('DOMContentLoaded', () => {
+            // Generates a random online user count between 120 and 180 to look realistic
+            const baseUsers = 135;
+            const fluctuation = Math.floor(Math.random() * 30) - 15;
+            
+            setTimeout(() => {
+                const el = document.getElementById('users-online');
+                let start = 0;
+                const end = baseUsers + fluctuation;
+                const duration = 1500;
+                const increment = end / (duration / 30);
+                
+                const timer = setInterval(() => {
+                    start += increment;
+                    el.textContent = Math.floor(start);
+                    if (start >= end) {
+                        el.textContent = end;
+                        clearInterval(timer);
+                    }
+                }, 30);
+                
+                // Set current time
+                const now = new Date();
+                document.getElementById('time-checked').textContent = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+            }, 500);
+        });
+    </script>
+    
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            once: true,
+            offset: 50,
+            duration: 800,
+            easing: 'ease-out-cubic',
+        });
+    </script>
+</body>
+</html>

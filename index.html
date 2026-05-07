@@ -11,6 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <!-- Crisp Live Chat -->
     <script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="50c7e67f-bf5e-4bd8-b6e5-3304fe3d5b3f";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
@@ -31,10 +32,11 @@
                 <span class="logo">COLUMN</span>
             </div>
             <nav class="nav-links">
-                <a href="#home">Home</a>
-                <a href="#features">Features</a>
-                <a href="#pricing">Pricing</a>
-                <a href="#faq">FAQ</a>
+                <a href="index.html#home">Home</a>
+                <a href="index.html#features">Features</a>
+                <a href="index.html#pricing">Pricing</a>
+                <a href="index.html#faq">FAQ</a>
+                <a href="status.html">Status</a>
             </nav>
             <div class="nav-actions">
                 <button id="cart-toggle" class="btn-icon" aria-label="Cart">
@@ -56,6 +58,7 @@
         <a href="#features" class="mobile-link">Features</a>
         <a href="#pricing" class="mobile-link">Pricing</a>
         <a href="#faq" class="mobile-link">FAQ</a>
+        <a href="status.html" class="mobile-link">Status</a>
         <a href="login.html" class="mobile-link">Portal</a>
     </div>
 
@@ -109,9 +112,9 @@
                         })();
                     </script>
                 </div>
-                <h1 class="hero-title">Experience <span class="text-gradient">Absolute Dominance</span></h1>
-                <p class="hero-subtitle">The most advanced, undetected, and feature-rich utility for Overwatch. Dominate the ladder with flawless predictive aiming and unbeatable security.</p>
-                <div class="hero-cta">
+                <h1 class="hero-title" data-aos="fade-up" data-aos-duration="1000">Experience <span class="text-gradient">Absolute Dominance</span></h1>
+                <p class="hero-subtitle" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">The most advanced, undetected, and feature-rich utility for Overwatch. Dominate the ladder with flawless predictive aiming and unbeatable security.</p>
+                <div class="hero-cta" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
                     <a href="#pricing" class="btn-primary btn-large btn-glow">View Plans</a>
                     <a href="#features" class="btn-secondary btn-large">Discover Features</a>
                 </div>
@@ -134,28 +137,28 @@
             </div>
             
             <div class="features-grid">
-                <div class="feature-card glass-panel">
+                <div class="feature-card glass-panel" data-aos="fade-up" data-aos-delay="100">
                     <div class="feature-icon-wrapper">
                         <svg viewBox="0 0 24 24" class="feature-icon"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="none" stroke="currentColor" stroke-width="2"/></svg>
                     </div>
                     <h3>Undetected & Secure</h3>
                     <p>Our custom Kernel Driver ensures your account remains fully protected from Warden and Defense Matrix.</p>
                 </div>
-                <div class="feature-card glass-panel">
+                <div class="feature-card glass-panel" data-aos="fade-up" data-aos-delay="200">
                     <div class="feature-icon-wrapper">
                         <svg viewBox="0 0 24 24" class="feature-icon"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="none" stroke="currentColor" stroke-width="2"/></svg>
                     </div>
                     <h3>Instant Delivery</h3>
                     <p>Automated system delivers your key and loader instantly after successful payment verification.</p>
                 </div>
-                <div class="feature-card glass-panel">
+                <div class="feature-card glass-panel" data-aos="fade-up" data-aos-delay="300">
                     <div class="feature-icon-wrapper">
                         <svg viewBox="0 0 24 24" class="feature-icon"><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" fill="none" stroke="currentColor" stroke-width="2"/></svg>
                     </div>
                     <h3>Streamlined Setup</h3>
                     <p>Our intuitive custom loader and 1-click config system makes the entire setup incredibly effortless.</p>
                 </div>
-                <div class="feature-card glass-panel">
+                <div class="feature-card glass-panel" data-aos="fade-up" data-aos-delay="400">
                     <div class="feature-icon-wrapper">
                         <svg viewBox="0 0 24 24" class="feature-icon"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" fill="none" stroke="currentColor" stroke-width="2"/></svg>
                     </div>
@@ -174,7 +177,7 @@
             
             <div class="pricing-container">
                 <!-- Daily Plan -->
-                <div class="pricing-card glass-panel" id="card-daily">
+                <div class="pricing-card glass-panel" id="card-daily" data-aos="fade-up" data-aos-delay="100">
                     <div class="card-glow"></div>
                     <div class="card-content">
                         <div class="plan-header">
@@ -198,7 +201,7 @@
                 </div>
 
                 <!-- Monthly Plan -->
-                <div class="pricing-card popular glass-panel" id="card-monthly">
+                <div class="pricing-card popular glass-panel" id="card-monthly" data-aos="fade-up" data-aos-delay="200">
                     <div class="popular-tag">MOST POPULAR</div>
                     <div class="card-glow"></div>
                     <div class="card-content">
@@ -224,7 +227,7 @@
                 </div>
 
                 <!-- Weekly Plan -->
-                <div class="pricing-card glass-panel" id="card-weekly">
+                <div class="pricing-card glass-panel" id="card-weekly" data-aos="fade-up" data-aos-delay="300">
                     <div class="card-glow"></div>
                     <div class="card-content">
                         <div class="plan-header">
@@ -257,7 +260,7 @@
             </div>
             
             <div class="faq-container">
-                <div class="faq-item glass-panel">
+                <div class="faq-item glass-panel" data-aos="fade-up" data-aos-delay="100">
                     <button class="faq-question">
                         <span>How quickly do I receive my key?</span>
                         <div class="faq-icon">
@@ -270,7 +273,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="faq-item glass-panel">
+                <div class="faq-item glass-panel" data-aos="fade-up" data-aos-delay="200">
                     <button class="faq-question">
                         <span>Is it safe for my main account?</span>
                         <div class="faq-icon">
@@ -283,7 +286,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="faq-item glass-panel">
+                <div class="faq-item glass-panel" data-aos="fade-up" data-aos-delay="300">
                     <button class="faq-question">
                         <span>Do you offer hardware spoofer?</span>
                         <div class="faq-icon">
@@ -348,5 +351,14 @@
     </svg>
 
     <script src="script.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            once: true,
+            offset: 50,
+            duration: 800,
+            easing: 'ease-out-cubic',
+        });
+    </script>
 </body>
 </html>
