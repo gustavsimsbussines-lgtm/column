@@ -1193,6 +1193,11 @@ footer {
         margin: 0 auto;
     }
     
+    .features-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
     .cart-sidebar {
         width: 100%;
         right: -100%;
