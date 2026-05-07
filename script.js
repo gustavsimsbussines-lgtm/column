@@ -284,39 +284,67 @@ document.addEventListener('DOMContentLoaded', () => {
         setInterval(drawRain, 35);
     }
     // --- Hacker Text Effect ---
-    const hackText = document.getElementById('hack-text');
+    const hackTexts = document.querySelectorAll('.hack-text');
     const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*";
-    let hackInterval = null;
+    let hackIntervals = [];
 
-    if (hackText) {
-        const startHacking = (target) => {
+    if (hackTexts.length > 0) {
+        const startHacking = (target, index) => {
             let iteration = 0;
-            clearInterval(hackInterval);
+            clearInterval(hackIntervals[index]);
             
-            hackInterval = setInterval(() => {
+            hackIntervals[index] = setInterval(() => {
                 target.innerText = target.dataset.value
                     .split("")
-                    .map((letter, index) => {
-                        if(index < iteration || letter === " ") {
-                            return target.dataset.value[index];
+                    .map((letter, i) => {
+                        if(i < iteration || letter === " ") {
+                            return target.dataset.value[i];
                         }
                         return letters[Math.floor(Math.random() * letters.length)];
                     })
                     .join("");
                 
                 if(iteration >= target.dataset.value.length){ 
-                    clearInterval(hackInterval);
+                    clearInterval(hackIntervals[index]);
                 }
                 
                 iteration += 1 / 3;
             }, 30);
         };
         
-        setTimeout(() => startHacking(hackText), 500);
+        hackTexts.forEach((text, i) => {
+            setTimeout(() => startHacking(text, i), 500);
+        });
 
         const pillBadge = document.querySelector('.pill-badge');
         if (pillBadge) {
-            pillBadge.addEventListener('mouseenter', () => startHacking(hackText));
+            pillBadge.addEventListener('mouseenter', () => {
+                hackTexts.forEach((text, i) => startHacking(text, i));
+            });
         }
+    }
+
+    // --- Countdown Logic ---
+    const countdownEl = document.getElementById('countdown');
+    if (countdownEl) {
+        // Target date: 2 weeks from May 7th 2026
+        const targetDate = new Date("2026-05-21T14:20:00+02:00").getTime();
+        
+        setInterval(() => {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+            
+            if (distance < 0) {
+                countdownEl.textContent = "00d 00h 00m 00s";
+                return;
+            }
+            
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            countdownEl.textContent = `${days}d ${hours.toString().padStart(2, '0')}h ${minutes.toString().padStart(2, '0')}m ${seconds.toString().padStart(2, '0')}s`;
+        }, 1000);
     }
 });

@@ -453,7 +453,7 @@
             }
         }
 
-        function showDashboard(key, expiry, username = "User") {
+        async function showDashboard(key, expiry, username = "User") {
             loginView.style.display = 'none';
             setUsernameView.style.display = 'none';
             dashboardView.style.display = 'flex';
@@ -466,6 +466,23 @@
             const masked = key.substring(0, 4) + "-XXXX-XXXX-" + key.substring(key.length - 4);
             displayKey.textContent = masked;
             displayExpiry.textContent = expiry;
+
+            // Check HWID cooldown
+            const varData = await keyAuthGetVar(currentSessionId, "last_hwid_reset");
+            if (varData.success && varData.response) {
+                const lastReset = parseInt(varData.response);
+                const now = Date.now();
+                const twoDaysMs = 2 * 24 * 60 * 60 * 1000;
+                
+                if (now - lastReset < twoDaysMs) {
+                    const timeLeft = twoDaysMs - (now - lastReset);
+                    const hoursLeft = Math.ceil(timeLeft / (1000 * 60 * 60));
+                    resetHwidBtn.disabled = true;
+                    document.getElementById('reset-hwid-text').textContent = `Wait ${hoursLeft}h`;
+                    resetHwidBtn.style.opacity = '0.5';
+                    resetHwidBtn.style.cursor = 'not-allowed';
+                }
+            }
         }
 
         saveUsernameBtn.addEventListener('click', async () => {
@@ -531,15 +548,24 @@
                     // For browser demo, we reset the local HWID to force new one next time
                     localStorage.removeItem('hwid');
                     alert("HWID Reset Successful! You can now login from your new hardware.");
+                    
+                    // Gray out button
+                    resetHwidBtn.disabled = true;
+                    document.getElementById('reset-hwid-text').textContent = `Wait 48h`;
+                    resetHwidBtn.style.opacity = '0.5';
+                    resetHwidBtn.style.cursor = 'not-allowed';
                 } else {
                     alert("Failed to reset HWID: " + (res.message || "Unknown error"));
                 }
             } catch (err) {
                 alert("Network error occurred while resetting HWID.");
             } finally {
-                btnText.style.display = 'block';
+                if (!resetHwidBtn.disabled) {
+                    btnText.style.display = 'block';
+                } else {
+                    btnText.style.display = 'block'; // Ensure text is visible even if disabled
+                }
                 loader.style.display = 'none';
-                resetHwidBtn.disabled = false;
             }
         });
 
