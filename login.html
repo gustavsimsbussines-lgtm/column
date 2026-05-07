@@ -282,7 +282,7 @@
                     </div>
                 </div>
                 <div style="width: 100%; height: 350px; background: rgba(0,0,0,0.3); border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); overflow: hidden;">
-                    <div id="tlkio" data-channel="column-vip" data-theme="theme--night" style="width:100%;height:100%;"></div>
+                    <iframe src="https://tlk.io/column-vip" width="100%" height="100%" frameborder="0" style="background: transparent;"></iframe>
                 </div>
             </div>
         </div>
@@ -512,15 +512,6 @@
             const masked = key.substring(0, 4) + "-XXXX-XXXX-" + key.substring(key.length - 4);
             displayKey.textContent = masked;
             displayExpiry.textContent = expiry;
-            
-            // Initialize Chat Box
-            if (!document.getElementById('tlkio-script')) {
-                const script = document.createElement('script');
-                script.id = 'tlkio-script';
-                script.src = "https://tlk.io/wrapper.js";
-                script.async = true;
-                document.body.appendChild(script);
-            }
 
             // Check HWID cooldown
             const varData = await keyAuthGetVar(currentSessionId, "last_hwid_reset");
