@@ -12,6 +12,7 @@
     
     <link rel="stylesheet" href="style.css">
     <script src="security.js"></script>
+    <script src="config.js"></script>
     <style>
         .login-container {
             min-height: 100vh;
@@ -459,6 +460,21 @@
             loginView.style.display = 'none';
             setUsernameView.style.display = 'none';
             dashboardView.style.display = 'flex';
+            
+            // Check global config for loader status
+            if (typeof CONFIG !== 'undefined' && !CONFIG.loaderEnabled) {
+                downloadBtn.disabled = true;
+                downloadBtn.style.opacity = '0.5';
+                downloadBtn.style.cursor = 'not-allowed';
+                downloadBtn.textContent = "Loader Disabled (Updating)";
+                
+                // Add click listener to show the message instead of downloading
+                downloadBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopImmediatePropagation();
+                    alert(CONFIG.disabledMessage);
+                }, true);
+            }
             
             // update welcome message
             const dashboardHeader = dashboardView.querySelector('h2');

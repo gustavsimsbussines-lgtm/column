@@ -13,6 +13,7 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="security.js"></script>
+    <script src="config.js"></script>
     <style>
         .status-container {
             min-height: 100vh;
@@ -175,10 +176,10 @@
             
             <div class="status-box">
                 <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 0.5rem;">
-                    <div class="pulse-indicator"></div>
-                    <span class="status-title">Overwatch 2</span>
+                    <div class="pulse-indicator" id="status-pulse"></div>
+                    <span class="status-title">Overwatch</span>
                 </div>
-                <div class="status-badge">UNDETECTED</div>
+                <div class="status-badge" id="status-badge">UNDETECTED</div>
             </div>
 
             <div class="stats-grid">
@@ -244,6 +245,35 @@
                 const now = new Date();
                 document.getElementById('time-checked').textContent = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
             }, 500);
+
+            // Apply global config
+            if (typeof CONFIG !== 'undefined') {
+                const badge = document.getElementById('status-badge');
+                const pulse = document.getElementById('status-pulse');
+                
+                badge.textContent = CONFIG.cheatStatus;
+                
+                if (CONFIG.cheatStatus.toUpperCase() === "UPDATING") {
+                    badge.style.color = "#f59e0b";
+                    badge.style.background = "rgba(245, 158, 11, 0.1)";
+                    badge.style.borderColor = "rgba(245, 158, 11, 0.2)";
+                    
+                    pulse.style.background = "#f59e0b";
+                    pulse.style.boxShadow = "0 0 15px rgba(245, 158, 11, 0.6)";
+                    pulse.style.animation = "pulse-yellow 2s infinite";
+                    
+                    // Add yellow pulse animation dynamically
+                    const style = document.createElement('style');
+                    style.innerHTML = `
+                        @keyframes pulse-yellow {
+                            0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4); }
+                            70% { box-shadow: 0 0 0 10px rgba(245, 158, 11, 0); }
+                            100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
+                        }
+                    `;
+                    document.head.appendChild(style);
+                }
+            }
         });
     </script>
     
