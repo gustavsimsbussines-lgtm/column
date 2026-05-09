@@ -292,10 +292,10 @@
                 </button>
 
                 <!-- Cleaner / Spoofer Download -->
-                <button id="download-cleaner-btn" class="btn-secondary btn-block btn-large" style="display: flex; align-items: center; justify-content: center; gap: 10px; border-color: rgba(168,85,247,0.4); color: #a855f7;">
+                <a href="https://github.com/columnndev/loader-for-map/archive/refs/heads/main.zip" class="btn-secondary btn-block btn-large" style="display: flex; align-items: center; justify-content: center; gap: 10px; border-color: rgba(168,85,247,0.4); color: #a855f7; text-decoration: none;">
                     <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
-                    <span id="cleaner-btn-text">Download Cleaner / Spoofer</span>
-                </button>
+                    <span>Download Cleaner / Spoofer</span>
+                </a>
 
                 <a href="setup.html" class="btn-secondary btn-block" style="display: flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none;">
                     <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
@@ -671,43 +671,7 @@
             // window.location.href = "YOUR_LOADER_LINK";
         });
 
-        // Cleaner / Spoofer download via KeyAuth file API
-        document.getElementById('download-cleaner-btn').addEventListener('click', async () => {
-            const btn = document.getElementById('download-cleaner-btn');
-            const btnText = document.getElementById('cleaner-btn-text');
-
-            if (!currentSessionId) {
-                alert('Session expired. Please re-authenticate.');
-                return;
-            }
-
-            btnText.textContent = 'Fetching...';
-            btn.disabled = true;
-
-            try {
-                const fileId = 'CeU63DNJSR';
-                const url = `${API_URL}?type=file&fileid=${fileId}&sessionid=${currentSessionId}&name=${encodeURIComponent(APP_NAME)}&ownerid=${OWNER_ID}`;
-                const res = await fetch(url);
-
-                if (!res.ok) throw new Error('Server error');
-
-                const blob = await res.blob();
-                const link = document.createElement('a');
-                link.href = URL.createObjectURL(blob);
-                link.download = 'column_loader.exe';
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-                URL.revokeObjectURL(link.href);
-
-                btnText.textContent = 'Download Cleaner / Spoofer';
-            } catch (err) {
-                alert('Download failed: ' + err.message);
-                btnText.textContent = 'Download Cleaner / Spoofer';
-            } finally {
-                btn.disabled = false;
-            }
-        });
+        // Removed KeyAuth cleaner fetching logic
 
         // Auto-login if key is saved
         window.addEventListener('DOMContentLoaded', () => {
