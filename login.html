@@ -283,27 +283,30 @@
                 </div>
             </div>
             
-            <button id="download-btn" class="btn-primary btn-block btn-large btn-glow" style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 0.5rem;">
-                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                Download Loader
-            </button>
-
-            <!-- Cleaner / Spoofer Download -->
-            <button id="download-cleaner-btn" class="btn-secondary btn-block btn-large" style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 0.5rem; border-color: rgba(168,85,247,0.4); color: #a855f7;">
-                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
-                <span id="cleaner-btn-text">Download Cleaner / Spoofer</span>
-            </button>
-
-            <a href="setup.html" class="btn-secondary btn-block" style="display: flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none;">
-                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
-                View Setup Guide
-            </a>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                <button id="reset-hwid-btn" class="btn-secondary btn-block" style="display: flex; align-items: center; justify-content: center;">
-                    <span id="reset-hwid-text">Reset HWID</span>
-                    <svg class="loader-icon" id="reset-hwid-loader" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" style="display: none;"><circle cx="12" cy="12" r="10" stroke-dasharray="31.4 31.4" stroke-dashoffset="0"></circle></svg>
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+                <button id="download-btn" class="btn-primary btn-block btn-large btn-glow" style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+                    <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                    Download Loader
                 </button>
-                <button id="logout-btn" class="btn-secondary btn-block">Logout</button>
+
+                <!-- Cleaner / Spoofer Download -->
+                <button id="download-cleaner-btn" class="btn-secondary btn-block btn-large" style="display: flex; align-items: center; justify-content: center; gap: 10px; border-color: rgba(168,85,247,0.4); color: #a855f7;">
+                    <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
+                    <span id="cleaner-btn-text">Download Cleaner / Spoofer</span>
+                </button>
+
+                <a href="setup.html" class="btn-secondary btn-block" style="display: flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none;">
+                    <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
+                    View Setup Guide
+                </a>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 4px;">
+                    <button id="reset-hwid-btn" class="btn-secondary btn-block" style="display: flex; align-items: center; justify-content: center;">
+                        <span id="reset-hwid-text">Reset HWID</span>
+                        <svg class="loader-icon" id="reset-hwid-loader" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" style="display: none;"><circle cx="12" cy="12" r="10" stroke-dasharray="31.4 31.4" stroke-dashoffset="0"></circle></svg>
+                    </button>
+                    <button id="logout-btn" class="btn-secondary btn-block">Logout</button>
+                </div>
             </div>
 
             <!-- Embedded VIP Chat -->
