@@ -186,7 +186,7 @@
                     <div class="pulse-indicator" id="status-pulse"></div>
                     <span class="status-title">Overwatch</span>
                 </div>
-                <div class="status-badge" id="status-badge">UNDETECTED</div>
+                <div class="status-badge" id="status-badge">IN TESTING PHASE FOR LAUNCH</div>
             </div>
 
             <div class="stats-grid">
@@ -276,6 +276,24 @@
                             0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4); }
                             70% { box-shadow: 0 0 0 10px rgba(245, 158, 11, 0); }
                             100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
+                        }
+                    `;
+                    document.head.appendChild(style);
+                } else if (CONFIG.cheatStatus.toUpperCase().includes("TESTING")) {
+                    badge.style.color = "#3b82f6";
+                    badge.style.background = "rgba(59, 130, 246, 0.1)";
+                    badge.style.borderColor = "rgba(59, 130, 246, 0.2)";
+                    
+                    pulse.style.background = "#3b82f6";
+                    pulse.style.boxShadow = "0 0 15px rgba(59, 130, 246, 0.6)";
+                    pulse.style.animation = "pulse-blue 2s infinite";
+                    
+                    const style = document.createElement('style');
+                    style.innerHTML = `
+                        @keyframes pulse-blue {
+                            0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4); }
+                            70% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
+                            100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
                         }
                     `;
                     document.head.appendChild(style);

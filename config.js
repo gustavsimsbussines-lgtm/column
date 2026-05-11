@@ -3,7 +3,7 @@
 
 const CONFIG = {
     // Cheat Status: "UNDETECTED", "UPDATING", "TESTING", "DETECTED"
-    cheatStatus: "UNDETECTED",
+    cheatStatus: "In testing phase for launch",
     
     // Set to false to disable the 'Download Loader' button in the portal
     loaderEnabled: true,
