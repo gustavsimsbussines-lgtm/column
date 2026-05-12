@@ -1,13 +1,13 @@
 // --- Global Site Configuration ---
-// You can edit this file directly on GitHub to instantly update the site status.
+// Automatically updated by GitHub Actions bot when Overwatch updates.
 
 const CONFIG = {
     // Cheat Status: "UNDETECTED", "UPDATING", "TESTING", "DETECTED"
-    cheatStatus: "In testing phase for launch",
+    cheatStatus: "UPDATING",
     
     // Set to false to disable the 'Download Loader' button in the portal
-    loaderEnabled: true,
+    loaderEnabled: false,
     
     // Message to show if the loader is disabled (e.g., when updating)
-    disabledMessage: "Overwatch just updated. We are updating the offsets. Please wait."
+    disabledMessage: "Overwatch just updated to build 149597. We are currently updating offsets. Please check Discord for ETA."
 };
