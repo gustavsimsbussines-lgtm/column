@@ -208,8 +208,8 @@
                 <div class="step-item" data-aos="fade-up" data-aos-delay="200">
                     <div class="step-number">2</div>
                     <div class="step-content">
-                        <h3>Disable Secure Boot (BIOS)</h3>
-                        <p>Our kernel driver requires Secure Boot to be disabled in order to load into memory properly. Restart your PC, repeatedly press F2 or DEL to enter your BIOS settings, find the "Secure Boot" option, and set it to <strong>Disabled</strong>. Save and exit.</p>
+                        <h3>Disable Core Isolation & Driver Blocklist</h3>
+                        <p>Our kernel driver relies on direct memory access. You must disable Windows Virtualization-based Security. Open Windows Settings > Privacy & Security > Windows Security > Device Security > Core Isolation Details. Turn <strong>OFF Memory Integrity</strong> and turn <strong>OFF Microsoft Vulnerable Driver Blocklist</strong>. Restart your PC if prompted.</p>
                     </div>
                 </div>
 
@@ -217,23 +217,14 @@
                 <div class="step-item" data-aos="fade-up" data-aos-delay="300">
                     <div class="step-number">3</div>
                     <div class="step-content">
-                        <h3>Disable Core Isolation & Driver Blocklist</h3>
-                        <p>Our kernel driver relies on direct memory access. You must disable Windows Virtualization-based Security. Open Windows Settings > Privacy & Security > Windows Security > Device Security > Core Isolation Details. Turn <strong>OFF Memory Integrity</strong> and turn <strong>OFF Microsoft Vulnerable Driver Blocklist</strong>. Restart your PC if prompted.</p>
+                        <h3>Download & Extract Loader</h3>
+                        <p>Login to the Client Portal using your License Key. Click the "Download Loader" button. Once downloaded, extract the ZIP file to your Desktop or a dedicated folder. Do not run the loader directly from inside the ZIP archive.</p>
                     </div>
                 </div>
 
                 <!-- Step 4 -->
                 <div class="step-item" data-aos="fade-up" data-aos-delay="400">
                     <div class="step-number">4</div>
-                    <div class="step-content">
-                        <h3>Download & Extract Loader</h3>
-                        <p>Login to the Client Portal using your License Key. Click the "Download Loader" button. Once downloaded, extract the ZIP file to your Desktop or a dedicated folder. Do not run the loader directly from inside the ZIP archive.</p>
-                    </div>
-                </div>
-
-                <!-- Step 5 -->
-                <div class="step-item" data-aos="fade-up" data-aos-delay="500">
-                    <div class="step-number">5</div>
                     <div class="step-content">
                         <h3>Run Loader & Play</h3>
                         <p>Right-click the extracted Loader executable and select <strong>"Run as Administrator"</strong>. Enter your License Key when prompted. Wait for the loader to say "Waiting for Game...", and then launch Overwatch. The menu will automatically appear once you are in the main menu (Press INSERT to toggle).</p>
