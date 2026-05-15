@@ -283,6 +283,10 @@
                     <span class="info-label">Expires</span>
                     <span class="info-value" id="display-expiry">...</span>
                 </div>
+                <div class="info-row">
+                    <span class="info-label">🟢 Online Now</span>
+                    <span class="info-value" id="display-online" style="color: #10b981;">—</span>
+                </div>
             </div>
             
             <div style="display: flex; flex-direction: column; gap: 12px;">
@@ -555,6 +559,11 @@
             displayKey.textContent = masked;
             displayExpiry.textContent = expiry;
 
+            // Fetch online user count from KeyAuth
+            fetchOnlineCount(sessionId);
+            // Refresh every 30 seconds
+            window._onlineInterval = setInterval(() => fetchOnlineCount(currentSessionId), 30000);
+
             // Check HWID cooldown
             const varData = await keyAuthGetVar(currentSessionId, "last_hwid_reset");
             if (varData.success && varData.response) {
@@ -570,6 +579,26 @@
                     resetHwidBtn.style.opacity = '0.5';
                     resetHwidBtn.style.cursor = 'not-allowed';
                 }
+            }
+        }
+
+        async function fetchOnlineCount(sessionId) {
+            try {
+                const url = `${API_URL}?type=fetchOnline&sessionid=${sessionId}&name=${encodeURIComponent(APP_NAME)}&ownerid=${OWNER_ID}`;
+                const res = await fetch(url);
+                const data = await res.json();
+                const el = document.getElementById('display-online');
+                if (el) {
+                    if (data.success && data.users !== undefined) {
+                        el.textContent = data.users + ' users';
+                    } else {
+                        // Fallback: show active sessions count if available
+                        el.textContent = data.count ? data.count + ' users' : 'N/A';
+                    }
+                }
+            } catch (e) {
+                const el = document.getElementById('display-online');
+                if (el) el.textContent = 'N/A';
             }
         }
 
