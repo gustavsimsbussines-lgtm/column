@@ -196,15 +196,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Checkout button
     checkoutBtn.addEventListener('click', () => {
-        const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+        // Redirect to Discord for purchase
+        window.location.href = "https://discord.gg/2dxtDMp8";
         
-        // --- Sellix / Shoppy Integration ---
-        // Replace the alert below with your actual shop link.
-        // Example: window.location.href = "https://sellix.io/product/YOUR_PRODUCT_ID";
-        
-        alert(`Proceeding to secure checkout...\n\nTotal to pay: $${total.toFixed(2)}\n\n(Note: Edit script.js line 202 to add your Sellix/Shoppy link here)`);
-        
-        // Reset cart after checkout demonstration
         cart = []; 
         updateCartUI();
         toggleCart();
