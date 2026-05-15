@@ -171,8 +171,8 @@
                             const r2 = await fetch(`${API_URL}?type=fetchOnline&sessionid=${d1.sessionid}&name=${encodeURIComponent(APP_NAME)}&ownerid=${OWNER_ID}`);
                             const d2 = await r2.json();
                             const el = document.getElementById('hero-online-count');
-                            if (el && d2.success && d2.users !== undefined) {
-                                el.textContent = d2.users;
+                            if (el && d2.success && Array.isArray(d2.users)) {
+                                el.textContent = d2.users.length;
                             }
                         } catch(e) {}
                     }

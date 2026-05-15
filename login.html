@@ -589,11 +589,10 @@
                 const data = await res.json();
                 const el = document.getElementById('display-online');
                 if (el) {
-                    if (data.success && data.users !== undefined) {
-                        el.textContent = data.users + ' users';
+                    if (data.success && Array.isArray(data.users)) {
+                        el.textContent = data.users.length + ' users';
                     } else {
-                        // Fallback: show active sessions count if available
-                        el.textContent = data.count ? data.count + ' users' : 'N/A';
+                        el.textContent = 'N/A';
                     }
                 }
             } catch (e) {
