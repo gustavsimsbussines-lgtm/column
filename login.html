@@ -560,7 +560,7 @@
             displayExpiry.textContent = expiry;
 
             // Fetch online user count from KeyAuth
-            fetchOnlineCount(sessionId);
+            fetchOnlineCount(currentSessionId);
             // Refresh every 30 seconds
             window._onlineInterval = setInterval(() => fetchOnlineCount(currentSessionId), 30000);
 
