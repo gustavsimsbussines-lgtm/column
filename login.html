@@ -401,40 +401,8 @@
         let currentKey = null;
         let currentExpiry = null;
 
-        // HWID Generation based on KeyAuth-JavaScript-Example (uses Windows SID if in Node/Electron)
-        let hwid = '';
-        try {
-            // Check if running in a Node.js/Electron environment
-            if (typeof require !== 'undefined') {
-                const os = require('os');
-                const cp = require('child_process');
-                const platform = os.platform();
-                
-                if (platform === "win32") {
-                    const winUser = os.userInfo().username;
-                    const sidOutput = cp.execSync(`wmic useraccount where name='${winUser}' get sid`).toString().split("\n");
-                    const sid = sidOutput[1] ? sidOutput[1].trim() : null;
-                    if (sid) hwid = sid;
-                } else if (platform === "linux") {
-                    const fs = require('fs');
-                    hwid = fs.readFileSync("/etc/machine-id", "utf-8").trim();
-                } else if (platform === "darwin") {
-                    const output = cp.execSync("ioreg -l | grep IOPlatformSerialNumber").toString();
-                    hwid = output.split("=")[1] ? output.split("=")[1].trim().replace(/"/g, "") : "";
-                }
-            }
-        } catch (e) {
-            console.log("Could not fetch native HWID (not in Node.js/Electron), falling back to browser HWID.");
-        }
-
-        // Fallback for standard browsers (if not in Electron or native fetch failed)
-        if (!hwid) {
-            hwid = localStorage.getItem('hwid');
-            if (!hwid) {
-                hwid = 'browser-' + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-                localStorage.setItem('hwid', hwid);
-            }
-        }
+        // HWID generation removed as requested. 
+        // WARNING: If HWID Lock is enabled on the KeyAuth Dashboard, omitting the HWID will cause KeyAuth to lock the license to the user's IP Address!
 
         async function keyAuthInit() {
             try {
@@ -454,7 +422,7 @@
 
         async function keyAuthLogin(key, sessionId) {
             try {
-                const url = `${API_URL}?type=license&key=${encodeURIComponent(key)}&sessionid=${sessionId}&name=${encodeURIComponent(APP_NAME)}&ownerid=${OWNER_ID}&hwid=${hwid}`;
+                const url = `${API_URL}?type=license&key=${encodeURIComponent(key)}&sessionid=${sessionId}&name=${encodeURIComponent(APP_NAME)}&ownerid=${OWNER_ID}`;
                 const res = await fetch(url);
                 const data = await res.json();
                 return data;
