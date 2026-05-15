@@ -401,11 +401,39 @@
         let currentKey = null;
         let currentExpiry = null;
 
-        // A simple HWID generation for browser (usually localstorage based)
-        let hwid = localStorage.getItem('hwid');
+        // HWID Generation based on KeyAuth-JavaScript-Example (uses Windows SID if in Node/Electron)
+        let hwid = '';
+        try {
+            // Check if running in a Node.js/Electron environment
+            if (typeof require !== 'undefined') {
+                const os = require('os');
+                const cp = require('child_process');
+                const platform = os.platform();
+                
+                if (platform === "win32") {
+                    const winUser = os.userInfo().username;
+                    const sidOutput = cp.execSync(`wmic useraccount where name='${winUser}' get sid`).toString().split("\n");
+                    const sid = sidOutput[1] ? sidOutput[1].trim() : null;
+                    if (sid) hwid = sid;
+                } else if (platform === "linux") {
+                    const fs = require('fs');
+                    hwid = fs.readFileSync("/etc/machine-id", "utf-8").trim();
+                } else if (platform === "darwin") {
+                    const output = cp.execSync("ioreg -l | grep IOPlatformSerialNumber").toString();
+                    hwid = output.split("=")[1] ? output.split("=")[1].trim().replace(/"/g, "") : "";
+                }
+            }
+        } catch (e) {
+            console.log("Could not fetch native HWID (not in Node.js/Electron), falling back to browser HWID.");
+        }
+
+        // Fallback for standard browsers (if not in Electron or native fetch failed)
         if (!hwid) {
-            hwid = 'browser-' + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-            localStorage.setItem('hwid', hwid);
+            hwid = localStorage.getItem('hwid');
+            if (!hwid) {
+                hwid = 'browser-' + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+                localStorage.setItem('hwid', hwid);
+            }
         }
 
         async function keyAuthInit() {
